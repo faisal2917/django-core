@@ -30,6 +30,7 @@ urlpatterns = [
     path('register/', register , name="register"),
     path('recipes/', recipes , name="recipes"),
     path('students/', get_students , name="get_students"),
+    path('see_marks/<student_id>/', see_marks , name="see_marks"),
     path('delete_recipe/<id>/', delete_recipe , name="delete_recipe"),
     path('update_recipe/<id>/', update_recipe , name="update_recipe"),
     path('about/', about , name="about"),

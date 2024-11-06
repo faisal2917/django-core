@@ -2,42 +2,20 @@
 {% block start %}
 
 <div class="container mt-5">
-  <form class="mb-4">
-  <div class="row">
-    <div class="col-md-6">
-      <input class="form-control" name="search" placeholder="search">
-    </div>
-    <div class="col-md-6">
-      <button class="btn btn-success">search</button>
-    </div>
-  </div>
-</form>
+    <h4>Rank : {{queryset.first.student.studentreportcard.first.student_rank}}</h4>
+    <h4>Total : {{total_marks.total_marks}}</h4>
+    <h4>Date of Result : {{queryset.first.student.studentreportcard.first.date_of_report_card_generation}}</h4>
 
     <table class="table striped">
 
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">student_id</th>
-            <th scope="col">student_name</th>
-            <th scope="col">department</th>
-            <th scope="col">student_email</th>
-            <th scope="col">student_age</th>
-          </tr>
-        </thead>
         <tbody>
-          {% for student in queryset %}
+          {% for marks in queryset %}
           <tr>
             <th scope="row">{{forloop.counter}}</th>
             <td>
-              <a href="{% url 'see_marks' student.student_id %}">
-              {{student.student_id}}
-            </a>
+              <b>{{marks.subject.subject_name}}</b>
             </td>
-            <td>{{student.student_name}}</td>
-            <td>{{student.department.department}}</td>
-            <td>{{student.student_email}}</td> 
-            <td>{{student.student_age}}</td>
+            <td>{{marks.marks}}</td>
           </tr>
           {% endfor %}
         </tbody>

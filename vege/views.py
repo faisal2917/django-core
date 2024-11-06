@@ -6,8 +6,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate , login , logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.db.models import Q
+from django.db.models import Q, Sum
+from .seed import generate_report_card
+from django.contrib.auth import get_user_model
 # Create your views here.
+
+User = get_user_model()
 
 def login_page(request):
     if request.method == "POST":
@@ -104,6 +108,8 @@ def delete_recipe(request, id):
 
 def get_students(request):
     queryset = Student.objects.all()
+
+
     if request.GET.get('search'):
         search = request.GET.get('search')
         queryset = queryset.filter(
@@ -119,3 +125,10 @@ def get_students(request):
     page_obj = paginator.get_page(page_number)
     print(page_obj.object_list)
     return render(request, 'report/students.html', {'queryset':page_obj})
+
+
+def see_marks(request, student_id):
+    queryset = SubjectMarks.objects.filter(student__student_id__student_id = student_id)
+    total_marks = queryset.aggregate(total_marks = Sum('marks'))
+
+    return render(request, 'report/see_marks.html', {'queryset':queryset, 'total_marks':total_marks, })
