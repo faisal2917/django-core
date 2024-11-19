@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 class Student(models.Model):
@@ -14,3 +16,9 @@ class Car(models.Model):
 
     def __str__(self) -> str:
         return self.car_name
+    
+
+@receiver(post_save , sender = Car)    
+def call_car_api(sender , instance , **kwargs):
+    print("car object are created...!")
+    print(sender , instance , kwargs)

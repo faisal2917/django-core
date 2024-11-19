@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 {% block start %}
-    <h1>This is a Index page</h1>
-    <a href="/about/">
+
+<div class="container">
+  <h1>This is a sent email</h1>
+
+  <a href="{% url 'send_email' %}" class="btn btn-success">Send Email</a>
+</div>
+    <!-- <a href="/about/">
         About
     </a>
     |
@@ -10,9 +15,9 @@
     </a>
     <p>Hey this is coming from django server</p>
                         <hr>
-                        <h3 style="color:red">Hope you are loving it:</h3>
+                        <h3 style="color:red">Hope you are loving it:</h3> -->
 
-    <table class="container">
+    <table class="container mt-5">
         <tr>
           <th>S.No</th>
           <th>Name</th>
